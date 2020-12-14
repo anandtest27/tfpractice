@@ -23,7 +23,7 @@ resource "aws_s3_bucket" "s3buc" {
 
 resource "aws_s3_bucket_object" "addfile" {
   bucket = aws_s3_bucket.s3buc.id
-  key = "messages_redhat.txt"
+  key = "Loginmessages.txt"
   source = "/var/log/messages"
   force_destroy = false
   
