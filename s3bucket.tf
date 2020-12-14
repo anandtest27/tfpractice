@@ -3,7 +3,7 @@
 provider aws {
     region = "ap-south-1"
     shared_credentials_file = "/root/.aws/credentials"
-    profile = "s3profile"
+    profile = "default"
 
 }
 
@@ -23,8 +23,8 @@ resource "aws_s3_bucket" "s3buc" {
 
 resource "aws_s3_bucket_object" "addfile" {
   bucket = aws_s3_bucket.s3buc.id
-  key = "aix_read.txt"
-  source = "C:\\Users\\Lenovo\\Desktop\\AIX_read.txt"
+  key = "messages_redhat.txt"
+  source = "/var/log/messages"
   force_destroy = false
   
 }
