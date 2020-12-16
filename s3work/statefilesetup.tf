@@ -35,7 +35,7 @@ resource "aws_dynamodb_table" "lockfortf" {
   hash_key = "LockID"
   attribute {
     name = "LockID"
-    type = "s"
+    type = "S"
   }
   
 }
