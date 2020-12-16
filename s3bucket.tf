@@ -7,6 +7,19 @@ provider aws {
 
 }
 
+terraform {
+  backend "s3" {
+    
+    bucket = "tf-main-storage"
+    key = "statefilesarea/tos3/terraform.tfstate"
+    region = "ap-south-1"
+
+    dynamodb_table = "tf-locks"
+    encrypt = true
+    
+  }
+}
+
 # create s3 bucket and tagging
 
 resource "aws_s3_bucket" "s3buc" {
