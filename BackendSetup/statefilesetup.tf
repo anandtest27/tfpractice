@@ -15,7 +15,7 @@ resource "aws_s3_bucket" "bucketfortf" {
     prevent_destroy = false
   }
   versioning {
-    enabled = true
+    enabled = false
   }
   server_side_encryption_configuration {
     rule {
