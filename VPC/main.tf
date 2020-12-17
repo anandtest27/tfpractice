@@ -181,7 +181,7 @@ resource "aws_instance" "test-instance" {
              EOF
 
  tags = {
-   "Name" = "test-instance"
+   "Name" = "ubuntu-instance"
  }
 
 }

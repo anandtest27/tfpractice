@@ -43,3 +43,12 @@ resource "aws_s3_bucket_object" "addfile" {
   force_destroy = false
   
 }
+
+#  Add a file into the new bucket 
+
+resource "aws_s3_bucket_object" "addfile2" {
+  bucket = aws_s3_bucket.s3buc.id
+  key = "Loginsecure.txt"
+  source = "/var/log/secure"
+  force_destroy = false
+}
