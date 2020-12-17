@@ -7,6 +7,8 @@ provider aws {
 
 }
 
+# Backend Configurations
+
 terraform {
   backend "s3" {
     
