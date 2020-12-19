@@ -38,7 +38,7 @@ resource "aws_s3_bucket" "s3buc" {
 
 resource "aws_s3_bucket_object" "addfile" {
   bucket = aws_s3_bucket.s3buc.id
-  key = "Loginmessages.txt"
+  key = "Loginmessagesnew.txt"
   source = "/var/log/messages"
   force_destroy = false
   
@@ -48,7 +48,7 @@ resource "aws_s3_bucket_object" "addfile" {
 
 resource "aws_s3_bucket_object" "addfile2" {
   bucket = aws_s3_bucket.s3buc.id
-  key = "Loginsecure.txt"
+  key = "Loginsecurenew.txt"
   source = "/var/log/secure"
   force_destroy = false
 }
