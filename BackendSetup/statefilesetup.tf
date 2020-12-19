@@ -11,9 +11,9 @@ provider aws {
 
 resource "aws_s3_bucket" "bucketfortf" {
   bucket = "tf-main-storage"
-  lifecycle {
-    force_destroy = true
-  }
+  # lifecycle {
+  #   force_destroy = false
+  # }
   versioning {
     enabled = false
   }
