@@ -30,6 +30,12 @@ variable "cidrblock" {
   description = "VPC range and subnet values"
 }
 
+variable "sshport" {
+  description = "Standard port for performing ssh login"
+  type = number
+  default = 22
+}
+
 resource "aws_vpc" "vpctest" {
   cidr_block = var.cidrblock[0].cid_block
   tags = {
