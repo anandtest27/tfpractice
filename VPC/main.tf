@@ -95,8 +95,8 @@ resource "aws_security_group" "test-sg" {
 
   ingress {
     description = "ssh coming from VPC"
-    from_port = 22
-    to_port = 22
+    from_port = var.sshport
+    to_port = var.sshport
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
     
