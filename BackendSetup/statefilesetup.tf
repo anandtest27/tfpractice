@@ -2,9 +2,10 @@
 
 provider aws {
     region = "ap-south-1"
-    shared_credentials_file = "/root/.aws/credentials"
+    # shared_credentials_file = "/root/.aws/credentials"
     profile = "default"
-
+    shared_credentials_file = "C:\\Users\\Lenovo\\.aws\\credentials"
+    
 }
 
 # create a s3 bucket for shared storage for terraform state files
