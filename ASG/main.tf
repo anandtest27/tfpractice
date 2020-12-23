@@ -36,7 +36,7 @@ data "aws_subnet_ids" "subnetids" {
 # Create security group to allow port 80 for ALB to listen
 
 resource "aws_security_group" "albsg" {
-  name = "sg-for-alb"
+  name = "sgforalb"
 
   # Allows inbound http requests
   ingress = [ {
@@ -45,6 +45,10 @@ resource "aws_security_group" "albsg" {
     protocol = "tcp"
     from_port = 80    
     to_port = 80
+    ipv6_cidr_blocks = ["0.0.0.0/0"]
+    prefix_list_ids = []
+    security_groups = []
+    self = true
   } ]
 
   # Allows all outbound requests
@@ -53,7 +57,11 @@ resource "aws_security_group" "albsg" {
     description = "allows all outbound traffic"
     from_port = 0
     to_port = 0
-    protocol = "-1"    
+    protocol = "-1"
+    ipv6_cidr_blocks = ["0.0.0.0/0"]
+    prefix_list_ids = []
+    security_groups = []
+    self = true
   } ]
 
 }
@@ -83,7 +91,7 @@ resource "aws_lb_target_group" "albtargetgroup" {
 resource "aws_launch_configuration" "asglaunchconfig" {
   image_id = "ami-03f0fd1a2ba530e75"
   instance_type = "t2.micro"
-  security_groups = [ aws_security_group.instance.id ]
+  security_groups = [ aws_security_group.albsg.id ]
   user_data = <<-EOF
              #!/bin/bash
              sudo apt update -y
@@ -127,7 +135,7 @@ resource "aws_lb" "albtest" {
 # Creating ALB listener
 
 resource "aws_lb_listener" "alblistener" {
-    load_balancer_arn = aws.lb.albtest.arn
+    load_balancer_arn = aws_lb.albtest.arn
     port = 80
     protocol = "HTTP"
 
@@ -145,12 +153,14 @@ resource "aws_lb_listener" "alblistener" {
 
 # Making a ALB Listener Rule
 
-resource "aws_alb_listener_rule" "alblistenerrule" {
+resource "aws_lb_listener_rule" "alblistenerrule" {
     listener_arn = aws_lb_listener.alblistener.arn
     priority = 100
     condition {
-      field = "path-pattern"
-      values = ["*"]
+      path_pattern {
+        values = ["*"]        
+      }
+
     }
 
     action {
